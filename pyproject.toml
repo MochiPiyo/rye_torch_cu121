@@ -1,0 +1,52 @@
+[project]
+name = "troch-cuda121"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "Hiyoko", email = "64686248+MochiPiyo@users.noreply.github.com" }
+]
+
+# 実行方法は、仮想環境をactivateするか、以下のようにする
+# rye run python .\src\torch_cuda121\__init__.py
+# だめな場合は絶対パスを入れる
+
+# install
+dependencies = [
+    # 他のバージョンと共存できない場合、rye syncでエラーになる
+    "transformers>=4.37.2",
+    "accelerate>=0.27.2",
+    # wheelのurlを指定したあとで、バージョン指定なしでrye add torch torchvisionする
+    "pandas>=2.2.1",
+    "seaborn>=0.13.2",
+    "matplotlib>=3.8.3",
+    "torch==2.2.1+cu121",
+    "torchvision==0.17.1+cu121",
+    "torchtext>=0.17.1",
+    "spacy>=3.7.4",
+]
+# to use cuda
+# これを書いたうえでrye add "torch==2.0.1" 
+[[tool.rye.sources]] # ここは2重かっこでなければ動かない
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cu121"
+type = "index"
+
+
+readme = "README.md"
+
+# pythonのバージョンは.python-versionに改定ある
+# rye pin 3.10のように設定
+requires-python = ">= 3.8"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+
+
+[tool.hatch.metadata]
+allow-direct-references = true
